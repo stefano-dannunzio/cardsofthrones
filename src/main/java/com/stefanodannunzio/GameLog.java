@@ -9,22 +9,22 @@ import java.io.IOException;
 public class GameLog {
     static final String LOG_FILE_NAME = "game_logs.txt";
     static final String DATA_FILE_NAME = "data.txt";
-    private static int logCount; // Contador de logs a nivel global
+    private static int logCount; // Global level logs counter
 
     public static void startLogging() {
         readLogCountFromDataFile();
-        logCount++; // Incrementar el contador de logs
+        logCount++; 
         writeLogHeader();
     }
 
     public static void writeToBothConsoleAndFile(String message) {
-        // Imprimir en la consola
+        
         System.out.println(message);
 
-        // Escribir en el archivo de logs
+        
         writeToFile(message);
 
-        // Actualizar el archivo de datos
+        
         updateDataFile();
     }
 
@@ -33,16 +33,16 @@ public class GameLog {
             File logFile = new File(LOG_FILE_NAME);
             File dataFile = new File(DATA_FILE_NAME);
 
-            // Crear el archivo de datos si no existe
+            // Data file creation if not exists
             if (!dataFile.exists()) {
                 dataFile.createNewFile();
                 writeToDataFile("0");
             }
 
-            // Escribir el mensaje en el archivo de logs
+            // Write message to log file
             writeToLogFile(message);
 
-            // Actualizar el número de logs en el archivo de datos
+            // Update the number of logs in the data file
             updateDataFile();
         } catch (IOException e) {
             e.printStackTrace();

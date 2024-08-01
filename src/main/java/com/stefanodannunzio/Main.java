@@ -161,23 +161,23 @@ public class Main {
         GameLog.writeToBothConsoleAndFile(player2.getCharactersInfo());
         GameLog.writeToBothConsoleAndFile("*****************************");
 
-        // Inicializar la ronda actual
+        // Start current round
         int currentRound = 1;
 
-        // Jugar hasta que uno de los jugadores se quede sin personajes
+        // Play until one of the players runs out of characters
         while (player1.hasCharacters() && player2.hasCharacters()) {
             GameLog.writeToBothConsoleAndFile("Round " + currentRound);
 
 
-            // Obtener los personajes a enfrentar
+            // Get the characters to fight
             Character player1Character = player1.getRandomCharacter();
             Character player2Character = player2.getRandomCharacter();
 
-            // Crear un objeto Combat y ejecutar los ataques
+            // Create a Combat object and execute the attacks
             Combat combat = new Combat(player1Character, player2Character);
             combat.start();
 
-            // Verificar si algún personaje ha sido derrotado
+            // Check if any character has fallen
             if (player1Character.getHealth() <= 0) {
                 GameLog.writeToBothConsoleAndFile(player1Character.getName() + " fell.");
                 player1.removeCharacter(player1Character);
@@ -187,7 +187,7 @@ public class Main {
                 player2.removeCharacter(player2Character);
             }
 
-            // Otorgar mejoras al personaje ganador
+            // Deliver upgrades to the winner
             if (player1Character.getHealth() > 0) {
                 player1Character.improveStats();
                 GameLog.writeToBothConsoleAndFile(player1Character.getName() + " received an upgrade.");
@@ -196,12 +196,12 @@ public class Main {
                 GameLog.writeToBothConsoleAndFile(player2Character.getName() + " received an upgrade.");
             }
 
-            // Pasar a la siguiente ronda
+            // Write a separator between rounds
             GameLog.writeToBothConsoleAndFile("-----------------------------------------------------------");
             currentRound++;
     }
 
-    // Declarar al ganador
+    // Write the winner to the logs
     if (player1.hasCharacters()) {
         GameLog.writeToBothConsoleAndFile("Player 1 Wins the Iron Throne!");
     } else {
@@ -220,7 +220,7 @@ public class Main {
                 }
                 reader.close();
             } else {
-                System.out.println("No hay logs disponibles.");
+                System.out.println("No logs available.");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -232,15 +232,15 @@ public class Main {
         File dataFile = new File(GameLog.DATA_FILE_NAME);
 
         if (logFile.delete()) {
-            System.out.println("Archivo de logs eliminado.");
+            System.out.println("Log file deleted.");
         } else {
-            System.out.println("No se pudo eliminar el archivo de logs.");
+            System.out.println("Not able to delete log file.");
         }
 
         if (dataFile.delete()) {
-            System.out.println("Archivo de datos eliminado.");
+            System.out.println("Data file deleted.");
         } else {
-            System.out.println("No se pudo eliminar el archivo de datos.");
+            System.out.println("Not able to delete data file.");
         }
     }
 }
